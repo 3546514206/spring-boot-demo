@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <p>
  * Hello服务API
@@ -22,8 +25,11 @@ public class HelloController {
     private HelloService helloService;
 
     @GetMapping("/sayHello")
-    public String sayHello(@RequestParam(defaultValue = "xkcoding") String name) {
+    public Map<String,Object> sayHello(@RequestParam(defaultValue = "xkcoding") String name) {
         log.info("i'm ready to call someone......");
-        return helloService.sayHello(name);
+        String respStr = helloService.sayHello(name);
+        Map<String,Object> resp = new HashMap<>();
+        resp.put("respStr",respStr);
+        return resp;
     }
 }
